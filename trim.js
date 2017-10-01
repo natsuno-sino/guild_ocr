@@ -17,7 +17,6 @@ obj1.addEventListener("change", function(evt) {
 }, false);
 
 function analysisImg(imgSrc) {
-  console.log("a");
   $("#view1").text("ID : ")
   $("#view2").text("総合値 : ")
 
@@ -75,13 +74,11 @@ function analysisImg(imgSrc) {
 
     if (!smartPhone) {
       for (str of result.text.trim().split(" ")) {
-        console.log(str);
         if (str.length >= 6) {
           text = str.replace(",", "");
         }
       }
     } else {
-      console.log(result)
       text = result.text.trim().replace(" ", "")
     }
 
@@ -122,7 +119,6 @@ function roundAtPointOne(num) {
 }
 
 function analysis(src, positionCallBack, resultCallbackID) {
-  console.log("a");
 
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
@@ -132,13 +128,10 @@ function analysis(src, positionCallBack, resultCallbackID) {
 
   img.src = src;
 
-console.log(src)
 
   img.onload = function() {
-    console.log("a");
 
     let position = positionCallBack(img)
-    console.log(position)
     let height = position.idBottom - position.idTop;
     let width = position.idWidth - position.idLeft;
     ctx.drawImage(img, position.idLeft, position.idTop, width, height, 0, 0, width, height);
