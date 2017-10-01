@@ -135,7 +135,7 @@ function analysis(src, positionCallBack, resultCallbackID) {
     let height = position.idBottom - position.idTop;
     let width = position.idWidth - position.idLeft;
     ctx.drawImage(img, position.idLeft, position.idTop, width, height, 0, 0, width, height);
-
+    $('body').append(canvas);
     tesser(canvas.toDataURL(), resultCallbackID, position.smartPhone);
   };
 }
