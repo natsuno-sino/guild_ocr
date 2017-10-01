@@ -22,7 +22,7 @@ function analysisImg(imgSrc) {
 
   let resultCallbackID = function(result, smartPhone) {
 
-    let text = "";
+    let text = "undef";
 
     if (!smartPhone) {
       for (str of result.text.trim().split(" ")) {
@@ -35,7 +35,7 @@ function analysisImg(imgSrc) {
     }
 
     if (text.length != 9) {
-      text = "0";
+      text = "undef";
     }
 
     $("#view1").text($("#view1").text() + text)
@@ -70,7 +70,7 @@ function analysisImg(imgSrc) {
 
   let resultCallbackParam = function(result, smartPhone) {
 
-    let text = "";
+    let text = "undef";
 
     if (!smartPhone) {
       for (str of result.text.trim().split(" ")) {
@@ -135,7 +135,7 @@ function analysis(src, positionCallBack, resultCallbackID) {
     let height = position.idBottom - position.idTop;
     let width = position.idWidth - position.idLeft;
     ctx.drawImage(img, position.idLeft, position.idTop, width, height, 0, 0, width, height);
-    $('body').append(canvas);
+
     tesser(canvas.toDataURL(), resultCallbackID, position.smartPhone);
   };
 }
