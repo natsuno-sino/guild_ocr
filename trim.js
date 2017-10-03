@@ -4,6 +4,9 @@ let INDEX_HEIGHT = 1334;
 
 let obj1 = document.getElementById("imgFile");
 
+/**
+ * ファイル変更時に呼び出されるイベント.
+ */
 obj1.addEventListener("change", function(evt) {
   let file = evt.target.files;
   let reader = new FileReader();
@@ -20,6 +23,12 @@ function analysisImg(imgSrc) {
   $("#view1").text("ID : ")
   $("#view2").text("総合値 : ")
 
+  /**
+   * ID読み込み時のコールバック.
+   * @param result - 読み込み結果文字列. スマホの場合は9桁文字列が読み込まれているはず.
+   * タブレットの場合は[13 123456789 1]のような感じでどこかに9桁文字列があるはず.
+   * @param smartPhone - スマホか否か.
+   */
   let resultCallbackID = function(result, smartPhone) {
 
     let text = "undef";
@@ -41,6 +50,12 @@ function analysisImg(imgSrc) {
     $("#view1").text($("#view1").text() + text)
   };
 
+  /**
+   * ID読み込み時の位置指定.
+   * iphone6と同じ縦横比のものについてはスマホと判定し、同じ位置を読み込む.
+   * タブレットの場合、高さは同じように算出できるが横の位置は特定できないため、画面右半分を読み込む.
+   * @param img - 対象画像
+   */
   let positionID = function(img) {
     let hScale = img.height / INDEX_HEIGHT;
     let wScale = img.width / INDEX_WIDTH;
@@ -68,6 +83,12 @@ function analysisImg(imgSrc) {
 
   analysis(imgSrc, positionID, resultCallbackID)
 
+  /**
+   * 総合値読み込み時のコールバック.
+   * @param result - 読み込み結果文字列. スマホの場合は[123 456] [123,456]のように(カンマが読み込めるかは解像度次第)読み込まれているはず.
+   * タブレットの場合は[13 123,456 1]のような感じでどこかに6桁以上の文字列があるはず.
+   * @param smartPhone - スマホか否か.
+   */
   let resultCallbackParam = function(result, smartPhone) {
 
     let text = "undef";
@@ -85,6 +106,12 @@ function analysisImg(imgSrc) {
     $("#view2").text($("#view2").text() + text)
   };
 
+  /**
+   * 総合値読み込み時の位置指定.
+   * iphone6と同じ縦横比のものについてはスマホと判定し、同じ位置を読み込む.
+   * タブレットの場合、高さは同じように算出できるが横の位置は特定できないため、画面左半分を読み込む.
+   * @param img - 対象画像
+   */
   let positionParam = function(img) {
     let hScale = img.height / INDEX_HEIGHT;
     let wScale = img.width / INDEX_WIDTH;
